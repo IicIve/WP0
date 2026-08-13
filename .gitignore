@@ -1,0 +1,33 @@
+# Build results
+generated/
+Debug/
+Release/
+x64/
+x86/
+# IDE/VS 一時ファイル
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.VC.db
+*.VC.opendb
+ipch/
+
+# デバッグ情報
+*.pdb
+*.idb
+*.ilk
+
+# Visual Studio キャッシュ
+*.aps
+*.ncb
+*.opendb
+
+# その他
+Dumps/
+imgui.ini
+*.log
+.DS_Store
+Thumbs.db
+
