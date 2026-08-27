@@ -50,6 +50,7 @@
 #include "Ring.h"
 #include "Cylinder.h"
 #include "KeyframeAnimation.h"
+#include "ImGuiManager.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -138,6 +139,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Ring* ring = nullptr;
 	Cylinder* cylinder = nullptr;
 	KeyframeAnimation* keyframeAnimation = nullptr;
+	ImGuiManager* imguiManager = nullptr;
 	Model::Skeleton skeleton;
 	Model::SkinCluster skinCluster;
 	std::vector<std::unique_ptr<Object3d>> levelObjects;
@@ -163,6 +165,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ring = new Ring();
 	cylinder = new Cylinder();
 	keyframeAnimation = new KeyframeAnimation();
+	imguiManager = new ImGuiManager();
 
 	////変数の宣言
 	//HRESULT hr;
@@ -192,6 +195,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	window->Initialize();
 	dxCommon->Initialize(window);
 	srvManager->Initialize(dxCommon);
+	imguiManager->Initialize(window, dxCommon, srvManager);
 	TextureManager::GetInstance()->Initialize(dxCommon, srvManager);
 	spriteCommon->Initialize(dxCommon);
 	sprite->Initialize(spriteCommon, "resources/uvChecker.png");
@@ -398,6 +402,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//入力の更新
 		input->Update();
 
+		imguiManager->Begin();
+#ifdef USE_IMGUI
+		static bool showDemoWindow = false;
+		ImGui::Begin("ImGui Test");
+		ImGui::Text("ImGui is working!");
+		ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+		ImGui::Checkbox("Show Demo Window", &showDemoWindow);
+		ImGui::End();
+
+		if (showDemoWindow) {
+			ImGui::ShowDemoWindow(&showDemoWindow);
+		}
+#endif
+		imguiManager->End();
+
 		if (input->PushMouse(1)) {
 			debugCameraRotate.x += static_cast<float>(input->GetMouseMoveY()) * mouseRotateSensitivity;
 			debugCameraRotate.y += static_cast<float>(input->GetMouseMoveX()) * mouseRotateSensitivity;
@@ -503,12 +522,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		particleManager2->Draw();
 		flashManager->Draw();
 		smokeManager->Draw();
-		
+		imguiManager->Draw();
 
 		dxCommon->PostDraw();
 		//TextureManager::GetInstance()->Finalize();
 
 	}
+
+	imguiManager->Finalize();
 
 #ifdef _DEBUG
 
@@ -535,6 +556,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete smokeManager;
 	delete flashManager;
 	delete keyframeAnimation;
+	delete imguiManager;
 	delete srvManager;
 	delete window;
 	delete dxCommon;

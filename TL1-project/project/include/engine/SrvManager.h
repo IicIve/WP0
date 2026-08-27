@@ -14,6 +14,7 @@ public:
 	//デスクリプタハンドル計算
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(uint32_t index);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(uint32_t index);
+	ID3D12DescriptorHeap* GetDescriptorHeap() const { return descriptorHeap.Get(); }
 
 	uint32_t Allocate();
 
@@ -43,4 +44,3 @@ private:
 
 
 };
-
