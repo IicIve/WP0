@@ -149,6 +149,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
     <ClCompile Include="KeyframeAnimation.cpp" />
@@ -220,6 +221,7 @@
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="ImGuiManager.h" />
     <ClInclude Include="include\engine\Camera.h" />

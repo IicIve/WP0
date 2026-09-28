@@ -23,8 +23,6 @@
 #include "externals/DirectXTex/d3dx12.h"
 #include <numbers>
 #include <memory>
-#include <wrl.h>
-#include <xaudio2.h>
 #include <direct.h>
 #include <json.hpp>
 
@@ -51,14 +49,13 @@
 #include "Cylinder.h"
 #include "KeyframeAnimation.h"
 #include "ImGuiManager.h"
+#include "AudioManager.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "Dbghelp.lib")
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
-#pragma comment(lib, "xaudio2.lib")
-
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -67,27 +64,6 @@ static LONG WINAPI ExportDump(EXCEPTION_POINTERS* exception);
 struct Sphere {
 	Vector3 center;
 	float radius;
-};
-
-struct ChunkHeader {
-	char id[4];
-	int32_t size;
-};
-
-struct RiffHeader {
-	ChunkHeader chunk;
-	char type[4];
-};
-
-struct FormatChunk {
-	ChunkHeader chunk;
-	WAVEFORMATEX fmt;
-};
-
-struct SoundData {
-	WAVEFORMATEX wfex;
-	BYTE* pBuffer;
-	unsigned int bufferSize;
 };
 
 //Windowsアプリでのエントリーポイント(main関数)
@@ -140,6 +116,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Cylinder* cylinder = nullptr;
 	KeyframeAnimation* keyframeAnimation = nullptr;
 	ImGuiManager* imguiManager = nullptr;
+	AudioManager* audioManager = nullptr;
 	Model::Skeleton skeleton;
 	Model::SkinCluster skinCluster;
 	std::vector<std::unique_ptr<Object3d>> levelObjects;
@@ -166,6 +143,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	cylinder = new Cylinder();
 	keyframeAnimation = new KeyframeAnimation();
 	imguiManager = new ImGuiManager();
+	audioManager = new AudioManager();
 
 	////変数の宣言
 	//HRESULT hr;
@@ -187,10 +165,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//UVTransform用の行列
 	Matrix4x4 uvTransformMatrix = MakeAffineMatrix(uvTransformSprite.scale, uvTransformSprite.rotate, uvTransformSprite.translate);
-
-	//Microsoft::WRL::ComPtr<IXAudio2> xAudio2;
-	//IXAudio2MasteringVoice* masterVoice;
-	//HRESULT result;
 
 	window->Initialize();
 	dxCommon->Initialize(window);
@@ -251,8 +225,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//camera->SetTranslate({ 0.0f,0.0f,0.0f });
 	//object3dCommon->SetDefaultCamera(camera);
 
-	//result = XAudio2Create(&xAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
-	//result = xAudio2->CreateMasteringVoice(&masterVoice);
+	audioManager->Initialize();
 
 #ifdef _DEBUG
 
@@ -525,7 +498,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imguiManager->Draw();
 
 		dxCommon->PostDraw();
-		//TextureManager::GetInstance()->Finalize();
 
 	}
 
@@ -548,6 +520,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	window->Finalize();
 
+	audioManager->Finalize();
+
 	TextureManager::GetInstance()->Finalize();
 	ModelManager::GetInstance()->Finalize();
 	delete input;
@@ -557,6 +531,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete flashManager;
 	delete keyframeAnimation;
 	delete imguiManager;
+	delete audioManager;
 	delete srvManager;
 	delete window;
 	delete dxCommon;
