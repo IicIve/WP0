@@ -151,6 +151,9 @@
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamePlayScene.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
     <ClCompile Include="KeyframeAnimation.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -199,6 +202,7 @@
     <ClCompile Include="src\engine\TextureManager.cpp" />
     <ClCompile Include="src\engine\Vector.cpp" />
     <ClCompile Include="src\engine\Window.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\shaders\Object3d.PS.hlsl">
@@ -223,6 +227,9 @@
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GamePlayScene.h" />
     <ClInclude Include="ImGuiManager.h" />
     <ClInclude Include="include\engine\Camera.h" />
     <ClInclude Include="include\engine\D3DResourceLeakChecker.h" />
@@ -257,6 +264,7 @@
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Ring.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />

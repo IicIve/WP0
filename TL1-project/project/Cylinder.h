@@ -96,6 +96,4 @@ private:
     Matrix4x4 projectionMatrix = MakePerspectiveFovMatrix(0.45f, static_cast<float>(Window::kClientWidth) / static_cast<float>(Window::kClientHeight), 0.1f, 100.0f);
     Matrix4x4 viewProjectionMatrix;
     Matrix4x4 worldViewProjectionMatrix;
-
 };
-
