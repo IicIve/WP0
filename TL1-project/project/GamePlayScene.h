@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 
+#include "BaseScene.h"
 #include "Model.h"
 #include "Vector.h"
 
@@ -18,22 +19,25 @@ class Ring;
 class SkyBox;
 class Sprite;
 class SrvManager;
+class SceneManager;
 
-class GamePlayScene final {
+class GamePlayScene final : public BaseScene {
 public:
-  GamePlayScene(Input *input, DirectXCommon *dxCommon, SrvManager *srvManager,
+  GamePlayScene(SceneManager *sceneManager, Input *input,
+                DirectXCommon *dxCommon, SrvManager *srvManager,
                 ModelCommon *modelCommon);
-  ~GamePlayScene();
+  ~GamePlayScene() override;
 
   GamePlayScene(const GamePlayScene &) = delete;
   GamePlayScene &operator=(const GamePlayScene &) = delete;
 
-  void Initialize();
-  void Update();
-  void Draw();
-  void Finalize();
+  void Initialize() override;
+  void Update() override;
+  void Draw() override;
+  void Finalize() override;
 
 private:
+  SceneManager *sceneManager = nullptr;
   // Frameworkが所有する共通基盤。GamePlaySceneは借りるだけで解放しない。
   Input *input = nullptr;
   DirectXCommon *dxCommon = nullptr;

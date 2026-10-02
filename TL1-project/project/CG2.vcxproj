@@ -149,17 +149,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="Cylinder.cpp" />
-    <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="src\engine\AudioManager.cpp" />
+    <ClCompile Include="src\engine\BaseScene.cpp" />
+    <ClCompile Include="src\engine\Cylinder.cpp" />
+    <ClCompile Include="src\engine\Framework.cpp" />
+    <ClCompile Include="src\engine\Game.cpp" />
     <ClCompile Include="GamePlayScene.cpp" />
-    <ClCompile Include="ImGuiManager.cpp" />
-    <ClCompile Include="KeyframeAnimation.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
-    <ClCompile Include="Ring.cpp" />
-    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="src\engine\ImGuiManager.cpp" />
+    <ClCompile Include="src\engine\KeyframeAnimation.cpp" />
+    <ClCompile Include="src\engine\Particle.cpp" />
+    <ClCompile Include="src\engine\ParticleManager.cpp" />
+    <ClCompile Include="src\engine\Ring.cpp" />
+    <ClCompile Include="src\engine\SceneManager.cpp" />
+    <ClCompile Include="src\engine\SkyBox.cpp" />
     <ClCompile Include="src\engine\Camera.cpp" />
     <ClCompile Include="src\engine\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="src\engine\DirectXCommon.cpp" />
@@ -225,12 +227,13 @@
     <None Include=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="Cylinder.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="include\engine\AudioManager.h" />
+    <ClInclude Include="include\engine\BaseScene.h" />
+    <ClInclude Include="include\engine\Cylinder.h" />
+    <ClInclude Include="include\engine\Framework.h" />
+    <ClInclude Include="include\engine\Game.h" />
     <ClInclude Include="GamePlayScene.h" />
-    <ClInclude Include="ImGuiManager.h" />
+    <ClInclude Include="include\engine\ImGuiManager.h" />
     <ClInclude Include="include\engine\Camera.h" />
     <ClInclude Include="include\engine\D3DResourceLeakChecker.h" />
     <ClInclude Include="include\engine\DirectXCommon.h" />
@@ -259,11 +262,12 @@
     <ClInclude Include="include\engine\TextureManager.h" />
     <ClInclude Include="include\engine\Vector.h" />
     <ClInclude Include="include\engine\Window.h" />
-    <ClInclude Include="KeyframeAnimation.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="ParticleManager.h" />
-    <ClInclude Include="Ring.h" />
-    <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="include\engine\KeyframeAnimation.h" />
+    <ClInclude Include="include\engine\Particle.h" />
+    <ClInclude Include="include\engine\ParticleManager.h" />
+    <ClInclude Include="include\engine\Ring.h" />
+    <ClInclude Include="include\engine\SceneManager.h" />
+    <ClInclude Include="include\engine\SkyBox.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>

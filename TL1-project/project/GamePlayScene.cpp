@@ -22,6 +22,7 @@
 #include "Object3dCommon.h"
 #include "ParticleManager.h"
 #include "Ring.h"
+#include "SceneManager.h"
 #include "SkyBox.h"
 #include "Sprite.h"
 #include "SpriteCommon.h"
@@ -50,10 +51,17 @@ struct LevelData {
 
 } // namespace
 
-GamePlayScene::GamePlayScene(Input *input, DirectXCommon *dxCommon,
-                             SrvManager *srvManager, ModelCommon *modelCommon)
-    : input(input), dxCommon(dxCommon), srvManager(srvManager),
-      modelCommon(modelCommon) {}
+GamePlayScene::GamePlayScene(SceneManager *sceneManager, Input *input,
+                             DirectXCommon *dxCommon, SrvManager *srvManager,
+                             ModelCommon *modelCommon)
+    : sceneManager(sceneManager), input(input), dxCommon(dxCommon),
+      srvManager(srvManager), modelCommon(modelCommon) {
+  assert(sceneManager);
+  assert(input);
+  assert(dxCommon);
+  assert(srvManager);
+  assert(modelCommon);
+}
 
 GamePlayScene::~GamePlayScene() = default;
 
@@ -224,6 +232,11 @@ void GamePlayScene::Initialize() {
 }
 
 void GamePlayScene::Update() {
+  if (input->TriggerKey(DIK_ESCAPE)) {
+    sceneManager->ChangeScene(SceneType::Title);
+    return;
+  }
+
 #ifdef USE_IMGUI
   static bool showDemoWindow = false;
   ImGui::Begin("ImGui Test");

@@ -3,7 +3,7 @@
 #include "Framework.h"
 #include <memory>
 
-class GamePlayScene;
+class SceneManager;
 
 class Game final : public Framework {
 public:
@@ -17,5 +17,5 @@ protected:
   void Finalize() override;
 
 private:
-  std::unique_ptr<GamePlayScene> gamePlayScene;
+  std::unique_ptr<SceneManager> sceneManager;
 };
