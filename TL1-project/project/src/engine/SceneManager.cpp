@@ -57,7 +57,7 @@ void SceneManager::ChangeScene(SceneType sceneType) {
 std::unique_ptr<BaseScene> SceneManager::CreateScene(SceneType sceneType) {
   switch (sceneType) {
   case SceneType::Title:
-    return std::make_unique<TitleScene>(this, input);
+    return std::make_unique<TitleScene>(this, input, dxCommon, modelCommon);
 
   case SceneType::GamePlay:
     return std::make_unique<GamePlayScene>(this, input, dxCommon, srvManager,

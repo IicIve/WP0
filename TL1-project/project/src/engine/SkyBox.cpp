@@ -1,8 +1,10 @@
 #include "SkyBox.h"
 #include "Logger.h"
 
-void SkyBox::Initialize(DirectXCommon* dxCommon) {
+void SkyBox::Initialize(DirectXCommon* dxCommon, const std::string& textureFilePath) {
 	dxCommon_ = dxCommon;
+	textureFilePath_ = textureFilePath;
+	assert(!textureFilePath_.empty());
 
 	GenerateGraphicsPipeLine();
 
@@ -120,7 +122,7 @@ void SkyBox::Initialize(DirectXCommon* dxCommon) {
 	indexData[34] = 21;
 	indexData[35] = 23;
 
-	textureManager->LoadTexture("resources/rostock_laage_airport_4k.dds");
+	textureManager->LoadTexture(textureFilePath_);
 }
 
 void SkyBox::Update(Camera* camera) {
@@ -151,7 +153,7 @@ void SkyBox::Draw() {
 	commandList->IASetIndexBuffer(&indexBufferView_);
 
 	commandList->SetGraphicsRootConstantBufferView(0, wvpResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootDescriptorTable(1, textureManager->GetSrvHandleGPU("resources/rostock_laage_airport_4k.dds"));
+	commandList->SetGraphicsRootDescriptorTable(1, textureManager->GetSrvHandleGPU(textureFilePath_));
 	commandList->DrawIndexedInstanced(36, 1, 0, 0, 0);
 
 }

@@ -10,8 +10,20 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+namespace {
+
+constexpr char kEnvironmentTexturePath[] =
+	"resources/rostock_laage_airport_4k.dds";
+
+} // namespace
+
 void Object3d::Initialize(Object3dCommon* object3dCommon) {
 	this->object3dCommon = object3dCommon;
+
+	// Object3dのピクセルシェーダーは環境マップを常に参照する。
+	// SkyBoxを生成しないシーンでも有効なSRVが存在するよう、
+	// Object3d側で依存テクスチャーの読み込みを保証する。
+	TextureManager::GetInstance()->LoadTexture(kEnvironmentTexturePath);
 
 	//WVP用のリソース作成
 	constexpr size_t kCBSize = (sizeof(TransformationMatrix) + 255) & ~255;
@@ -80,7 +92,7 @@ void Object3d::Draw() {
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(1, wvpResource->GetGPUVirtualAddress());
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource->GetGPUVirtualAddress());
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(4, cameraResource->GetGPUVirtualAddress());
-	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(5, TextureManager::GetInstance()->GetSrvHandleGPU("resources/rostock_laage_airport_4k.dds"));
+	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(5, TextureManager::GetInstance()->GetSrvHandleGPU(kEnvironmentTexturePath));
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(6, pointLightResource->GetGPUVirtualAddress());
 	if (model) {
 		model->Draw();
@@ -91,7 +103,7 @@ void Object3d::Draw(const Model::SkinCluster& skinCluster) {
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(1, wvpResource->GetGPUVirtualAddress());
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(3, directionalLightResource->GetGPUVirtualAddress());
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(4, cameraResource->GetGPUVirtualAddress());
-	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(5, TextureManager::GetInstance()->GetSrvHandleGPU("resources/rostock_laage_airport_4k.dds"));
+	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootDescriptorTable(5, TextureManager::GetInstance()->GetSrvHandleGPU(kEnvironmentTexturePath));
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(6, pointLightResource->GetGPUVirtualAddress());
 	if (model) {
 		model->Draw(skinCluster);

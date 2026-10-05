@@ -80,7 +80,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>$(projectDir);$(projectDir)include/engine;$(projectDir)externals;$(projectDir)externals/imgui;$(projectDir)externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir);$(projectDir)include/engine;$(projectDir)include/application;$(projectDir)externals;$(projectDir)externals/imgui;$(projectDir)externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,7 +105,7 @@
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(projectDir);$(projectDir)include/engine;$(projectDir)externals;$(projectDir)externals/imgui;$(projectDir)externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir);$(projectDir)include/engine;$(projectDir)include/application;$(projectDir)externals;$(projectDir)externals/imgui;$(projectDir)externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,7 +133,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(projectDir);$(projectDir)include/engine;$(projectDir)externals;$(projectDir)externals/imgui;$(projectDir)externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(projectDir);$(projectDir)include/engine;$(projectDir)include/application;$(projectDir)externals;$(projectDir)externals/imgui;$(projectDir)externals/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,7 +154,10 @@
     <ClCompile Include="src\engine\Cylinder.cpp" />
     <ClCompile Include="src\engine\Framework.cpp" />
     <ClCompile Include="src\engine\Game.cpp" />
-    <ClCompile Include="GamePlayScene.cpp" />
+    <ClCompile Include="src\application\GamePlayScene.cpp" />
+    <ClCompile Include="src\application\Enemy.cpp" />
+    <ClCompile Include="src\application\MapChipField.cpp" />
+    <ClCompile Include="src\application\Player.cpp" />
     <ClCompile Include="src\engine\ImGuiManager.cpp" />
     <ClCompile Include="src\engine\KeyframeAnimation.cpp" />
     <ClCompile Include="src\engine\Particle.cpp" />
@@ -204,7 +207,7 @@
     <ClCompile Include="src\engine\TextureManager.cpp" />
     <ClCompile Include="src\engine\Vector.cpp" />
     <ClCompile Include="src\engine\Window.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="src\application\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\shaders\Object3d.PS.hlsl">
@@ -232,7 +235,10 @@
     <ClInclude Include="include\engine\Cylinder.h" />
     <ClInclude Include="include\engine\Framework.h" />
     <ClInclude Include="include\engine\Game.h" />
-    <ClInclude Include="GamePlayScene.h" />
+    <ClInclude Include="include\application\GamePlayScene.h" />
+    <ClInclude Include="include\application\Enemy.h" />
+    <ClInclude Include="include\application\MapChipField.h" />
+    <ClInclude Include="include\application\Player.h" />
     <ClInclude Include="include\engine\ImGuiManager.h" />
     <ClInclude Include="include\engine\Camera.h" />
     <ClInclude Include="include\engine\D3DResourceLeakChecker.h" />
@@ -268,7 +274,7 @@
     <ClInclude Include="include\engine\Ring.h" />
     <ClInclude Include="include\engine\SceneManager.h" />
     <ClInclude Include="include\engine\SkyBox.h" />
-    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="include\application\TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt" />

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <vector>
 #include <wrl.h>
 #include <d3d12.h>
@@ -32,7 +33,7 @@ public:
         Matrix4x4 World;
     };
 
-    void Initialize(DirectXCommon* dxCommon);
+    void Initialize(DirectXCommon* dxCommon, const std::string& textureFilePath);
     void Update(Camera* camera);
     void Draw();
 
@@ -48,6 +49,7 @@ private:
 
     DirectXCommon* dxCommon_ = nullptr;
     TextureManager* textureManager = nullptr;
+    std::string textureFilePath_;
 
     std::vector<VertexData> vertices_;
 
